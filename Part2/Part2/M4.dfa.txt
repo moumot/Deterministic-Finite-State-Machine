@@ -1,0 +1,15 @@
+# This DFA recognizes { x in {0,1}* | x does not end in 000 }
+# qe last bit was a 1 or non-existent
+# q0 last two bits were 10
+# q00 last three bits were 100
+# q000 last three bits were 000
+states: qe; q0; q00; q1
+input_alphabet: a; b
+start_state: qe # no last bit when we start
+accept_states: qe; q00; q0 # accept as long as the last three bits weren’t 000
+# if we see a a, reset: qe,a -> qe; q0,a -> qe; q00,a -> qe; q000,a -> qe
+# if we see a b, count one more a than before: qe,b -> q0; q0,b -> q00; q00,b -> q000
+# until we get to three, and then just remember: q000,b -> q000
+#everything on one line
+delta: qe,a -> qe; q0,a -> qe; q00,a -> qe; q1,a -> qe; qe,b -> q0; q0,b -> q00;q00,b -> q1; q1,b -> q1
+

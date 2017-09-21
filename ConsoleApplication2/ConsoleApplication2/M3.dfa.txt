@@ -1,0 +1,9 @@
+# This DFA recognizes { x in {a,b}* | x recognize even number of input}
+# qe even number
+# q0 odd number inputsstates: qe; q0
+states: qe; q0
+input_alphabet: a; b
+start_state: qe #start with even number of input
+accept_states: qe# accept as long as the string has even number of input and ends with 'a'
+# if we see an even number input : q0,a -> qe, q0,b -> q0
+delta: qe,a -> q0; q0,a -> qe;qe,b -> q0; q0,b -> qe

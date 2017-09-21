@@ -1,0 +1,11 @@
+# This DFA recognizes { x in {a,b}* | x recognize even number of input and ends with 'a'}
+# qe even number
+# q0 odd number inputs
+# q00 even number that ends with 'a'
+states: qe; q0; q00
+input_alphabet: a; b
+start_state: qe #start with even number of input
+accept_states: q00# accept as long as the string has even number of input and ends with 'a'
+# if we see a 'a' with even number, accept: q0,a -> q00
+# if we see a 'b' or even number, loop: qe,a -> q0,q00,a -> q0,q0,b -> qe,qe,b -> q0,q00,b -> q0
+delta: qe,a -> q0; q0,a -> q00;q00,a -> q0;qe,b -> q0; q0,b -> qe;q00,b -> q0

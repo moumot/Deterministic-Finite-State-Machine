@@ -1,0 +1,13 @@
+# This DFA recognizes { x in {0,1}* | x does not start in aa }
+# qe empty
+# q0 start with a
+# q00 start with aa
+# q000 start with aaa
+states: qe; q0; q00; q000
+input_alphabet: a; b
+start_state: qe # empty when we start
+accept_states: qe; q00; q0 # accept as long as the it doesnt start with aaa
+# if we see a b, accept: qe,b -> qe; q0,b -> qe; q00,b -> qe
+# if we see a a, count one more 0 than before: qe,a -> q0; q0,a -> q00; q00,a -> q000
+#everything on one line
+delta: qe,b -> qe; q0,b -> q0; q00,b -> q00; q000,b -> q000; qe,a -> q0; q0,a -> q00;q00,a -> q000; q000,a -> q000
